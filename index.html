@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Beloved's Sanctuary - Eternal Love Flow 🌹</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script>
+        // --- Tailwind Configuration with Custom Colors and Animations ---
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'love-ruby': '#A50044',        // Deep Ruby Red
+                        'love-rosegold': '#C4915C',    // Luxurious Rose Gold
+                        'love-pink-blush': '#FCE4EC',  // Very light blush for main background
+                        'love-midnight': '#311B92',    // Dark, sophisticated Purple
+                        'love-white': '#FFFFFF',
+                        'love-dark-bg': '#641E38',     // Dark background accent
+                        'love-accent-pink': '#FFB6C1', // Light Pink for gradient
+                    },
+                    keyframes: {
+                        // Heart Animation: Beats and rotates
+                        'heart-beat': { 
+                            '0%, 100%': { transform: 'scale(1.0) rotate(-45deg)' }, 
+                            '50%': { transform: 'scale(1.15) rotate(-45deg)' } 
+                        },
+                        // Fade in from bottom
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        // Gentle floating effect
+                        'float-love': {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)', opacity: '1' },
+                            '50%': { transform: 'translateY(-10px) scale(1.05)', opacity: '0.9' }
+                        },
+                        // Soft pulsing for a decoration element
+                        'pulsate-decoration': {
+                            '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+                            '50%': { transform: 'scale(1.05)', opacity: '0.8' }
+                        },
+                        // Falling effect for hearts (Brishti)
+                        'fall': {
+                            '0%': { transform: 'translateY(-10vh) translateX(0) rotate(0deg)', opacity: '0.8' },
+                            // Random horizontal drift and full rotation
+                            '100%': { transform: 'translateY(100vh) translateX(var(--fall-x-end)) rotate(360deg)', opacity: '0' }
+                        },
+                        // Progress bar animation
+                        'progress-fill': {
+                            '0%': { width: '0%' },
+                            '100%': { width: 'var(--progress-width)' } // Will be set dynamically
+                        }
+                    },
+                    animation: {
+                        'heart-beat': 'heart-beat 1.5s ease-in-out infinite',
+                        'fade-in-up': 'fade-in-up 1s ease-out',
+                        'float-love': 'float-love 3s ease-in-out infinite',
+                        'falling-heart': 'fall linear infinite',
+                        'pulsate-decoration': 'pulsate-decoration 4s ease-in-out infinite',
+                        'progress-fill': 'progress-fill 2s ease-out forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* --- Custom Styles for Polish and Bengali Typography --- */
+        @import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla:wght@400;700&family=Playfair+Display:wght@700;900&display=swap');
+        
+        body { 
+            font-family: 'Tiro Bangla', sans-serif; 
+            /* Premium Radial Gradient Background */
+            background: radial-gradient(circle at 50% 10%, #FFB6C1, #A50044); 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            /* Ensure the body is the main container for fixed elements */
+            position: relative; 
+        }
+        .premium-font { font-family: 'Playfair Display', serif; }
+        
+        /* Premium Card Shadow with Ruby Glow */
+        .card-shadow-premium { 
+            box-shadow: 
+                0 30px 60px -15px rgba(165, 0, 68, 0.7), 
+                0 0 0 2px rgba(255, 255, 255, 0.2); 
+            transition: transform 0.4s ease-in-out;
+        }
+        
+        /* Glassmorphism Navigation Bar */
+        .glass-nav {
+            background-color: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(15px); 
+            border: 2px solid rgba(255, 255, 255, 0.4); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Love Line Container Styling (Paper Effect) */
+        .love-paper {
+            background: linear-gradient(145deg, #FFFAFB, #FCE4EC); 
+            border-radius: 15px;
+            border: 2px solid #C4915C; 
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+             /* NEW: Subtle background pattern for texture */
+            background-image: radial-gradient(#C4915C 0.5px, transparent 0.5px);
+            background-size: 15px 15px;
+        }
+        .love-line {
+            font-size: 1.5rem; font-weight: 700; color: #311B92; padding: 15px;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Falling Heart (Brishti) Styling - The z-index is CRUCIAL to stay behind main content */
+        .falling-heart {
+            position: fixed; 
+            top: -10vh; 
+            font-size: 1.8rem; 
+            color: #FF4081; 
+            pointer-events: none; 
+            z-index: 0; /* Ensures it is behind the main content area (z-index: 10) */
+            filter: drop-shadow(0 0 7px rgba(255, 0, 0, 0.6)); 
+            animation-name: fall; 
+            animation-timing-function: linear; 
+            animation-iteration-count: infinite;
+        }
+
+        /* Navigation Links & Active Tab Styling */
+        .nav-link { transition: all 0.3s ease; position: relative; color: #311B92; font-weight: 700; cursor: pointer; }
+        .nav-link:hover { color: #A50044; }
+        /* Underline effect for active/hover */
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 3px; bottom: -5px; left: 50%; transform: translateX(-50%); background-color: #C4915C; transition: width 0.3s ease; }
+        .nav-link.active-tab::after { width: 100%; }
+        .nav-link.active-tab { color: #A50044; }
+
+        /* Custom Input Style for Calculator */
+        .input-style {
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px; /* full-rounded */
+            border: 3px solid #C4915C;
+            background-color: #FFFFFF;
+            font-size: 1.125rem;
+            color: #311B92;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .input-style:focus {
+            outline: none;
+            border-color: #A50044;
+            box-shadow: 0 0 0 4px rgba(165, 0, 68, 0.3);
+        }
+
+         /* Progress Bar Styling */
+        .progress-bar {
+            height: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: #FCE4EC; /* love-pink-blush */
+            overflow: hidden;
+            border: 2px solid #A50044; /* love-ruby */
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #C4915C, #A50044);
+            transition: width 2s ease-out;
+            border-radius: 0.5rem 0 0 0.5rem;
+            position: absolute;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 relative min-h-screen" onclick="startMusicOnInteraction()">
+    
+    <audio id="bgMusic" src="./nil.mp3" loop></audio>
+
+    <header class="sticky top-0 z-30 mb-10">
+        <nav class="max-w-4xl mx-auto glass-nav p-4 rounded-full shadow-xl flex justify-between items-center">
+            <h1 class="text-2xl premium-font text-love-ruby font-extrabold drop-shadow-md">অনন্ত ভালোবাসা💖</h1>
+            <div class="space-x-4 md:space-x-8">
+                <a class="nav-link active-tab" onclick="showSection('home', event)">Home</a>
+                <a class="nav-link" onclick="showSection('gallery', event)">Gallery</a>
+                <a class="nav-link" onclick="showSection('calculator', event)">Love Calculator</a>
+            </div>
+            <a onclick="toggleMusic()" class="text-love-ruby hover:text-love-rosegold transition-colors cursor-pointer" title="Start/Pause Background Music">
+                <i id="musicIcon" class="fas fa-volume-off text-2xl"></i>
+            </a>
+        </nav>
+    </header>
+
+    <div class="max-w-4xl mx-auto bg-love-pink-blush p-8 md:p-12 rounded-3xl card-shadow-premium z-10 relative animate-fade-in-up">
+
+        <div id="home-section">
+            <div class="text-center mb-10">
+                <h1 class="premium-font text-6xl md:text-8xl text-love-midnight mb-4 drop-shadow-lg leading-tight font-extrabold">My Sweetheart, My Soul</h1> 
+                
+                <div class="max-w-xl mx-auto mt-4 py-3 px-6 bg-love-dark-bg/80 rounded-full shadow-xl text-love-white border-2 border-love-rosegold/50 animate-float-love">
+                    <p class="text-lg font-bold tracking-wider"> তোমার চোখে চোখ রাখলেই মনে হয়, এটাই আমার পৃথিবী❤️</p>
+                </div>
+
+                <p class="text-love-ruby text-xl font-normal border-b pb-4 mt-4">অফুরন্ত ভালোবাসা নিয়ে তৈরি এই ওয়েবসাইট, কেবল তোমারই জন্য!</p>
+                
+                <div class="mt-8 p-4 bg-love-rosegold/30 rounded-lg border-2 border-love-ruby animate-pulsate-decoration">
+                    <div class="flex items-center justify-center space-x-4 text-3xl font-bold text-love-ruby">
+                        <i class="fas fa-heart text-5xl animate-heart-beat"></i>
+                        <span class="premium-font text-shadow-lg">Love & Affection</span>
+                        <i class="fas fa-heart text-5xl animate-heart-beat" style="animation-delay: -0.75s;"></i>
+                    </div>
+                    <p class="mt-2 text-love-midnight font-medium">আমার সব গল্পের শুরু তুমি, আর শেষটাও তোমাতেই হোক।</p>
+                </div>
+            </div>
+            
+            <div class="text-center mb-16 p-8 love-paper shadow-inner-xl animate-fade-in-up" style="animation-delay: 0.3s;">
+                <h2 class="text-3xl text-love-midnight premium-font font-bold mb-6">ভালোবাসার কারণ ❤️</h2>
+                
+                <div id="letterContainer" class="p-5 mb-8">
+                    <p id="loveLine" class="love-line">আজকে বলেই ফেলি ,,,,</p>
+                </div>
+
+                <button class="px-12 py-4 bg-love-ruby text-love-white rounded-full text-2xl font-extrabold shadow-2xl hover:scale-105 transition-transform transform hover:-translate-y-1 active:scale-95 shadow-love-ruby/50" 
+                        onclick="spinForLoveLine()">
+                    <i class="fas fa-hand-sparkles mr-3"></i> তাহলে শোনো
+                </button>
+            </div>
+            
+            <div class="text-center mt-20 p-6 border-t-4 border-love-rosegold/50 animate-fade-in-up" style="animation-delay: 0.6s;">
+                <h3 class="text-2xl text-love-midnight premium-font font-bold mb-4">Connect with Niyamul Hasan</h3>
+                <div class="flex justify-center space-x-6">
+                    <a href="https://www.facebook.com/niyamul.hasan.314738" target="_blank" class="text-love-ruby hover:text-love-rosegold transition-colors text-3xl" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/@niyamulhasan000" target="_blank" class="text-love-ruby hover:text-love-rosegold transition-colors text-3xl" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div id="gallery-section" class="hidden">
+             <div class="text-center mb-10">
+                <h1 class="text-4xl md:text-5xl text-love-midnight premium-font font-extrabold mb-2 drop-shadow-lg animate-fade-in-up">Our Golden Moments 📸</h1>
+                <p class="text-love-ruby text-xl font-normal border-b pb-4 animate-fade-in-up" style="animation-delay: 0.2s;">Every picture tells a story of our love and journey.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="gallery-card rounded-xl aspect-square overflow-hidden transform hover:scale-105 transition-transform duration-500 shadow-xl animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <img src="./images (4).jpeg" alt="A romantic moment 1" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="gallery-card rounded-xl aspect-square overflow-hidden transform hover:scale-105 transition-transform duration-500 shadow-xl animate-fade-in-up" style="animation-delay: 0.5s;">
+                    <img src="./67d502ff06797abc5169c1c972a95e1a.png" alt="A romantic moment 2" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="gallery-card rounded-xl aspect-square overflow-hidden transform hover:scale-105 transition-transform duration-500 shadow-xl animate-fade-in-up" style="animation-delay: 0.6s;">
+                    <img src="./download.jpeg" alt="A romantic moment 3" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                   <div class="gallery-card rounded-xl aspect-square overflow-hidden transform hover:scale-105 transition-transform duration-500 shadow-xl animate-fade-in-up" style="animation-delay: 0.7s;">
+                    <img src="./images (2).jpeg" alt="A romantic moment 4" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="gallery-card rounded-xl aspect-square overflow-hidden transform hover:scale-105 transition-transform duration-500 shadow-xl animate-fade-in-up" style="animation-delay: 0.8s;">
+                    <img src="./images (3).jpeg" alt="A romantic moment 5" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="gallery-card rounded-xl aspect-square overflow-hidden transform hover:scale-105 transition-transform duration-500 shadow-xl animate-fade-in-up" style="animation-delay: 0.9s;">
+                    <img src="./images.jpeg" alt="A romantic moment 6" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+            </div>
+        </div>
+
+        <div id="calculator-section" class="hidden">
+            <div class="max-w-xl mx-auto">
+                <div class="text-center mb-10">
+                    <h1 class="text-4xl md:text-5xl text-love-midnight premium-font font-extrabold mb-2 drop-shadow-lg animate-fade-in-up">True Love Calculator ❤️</h1>
+                    <p class="text-love-ruby text-xl font-normal border-b pb-4 animate-fade-in-up" style="animation-delay: 0.2s;">Calculate your Love Percentage for fun and entertainment!</p>
+                </div>
+
+                <div class="space-y-6 animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <div>
+                        <label for="yourName" class="block text-love-midnight font-semibold mb-2">Your Name:</label>
+                        <input type="text" id="yourName" class="input-style w-full" placeholder=" " value="">
+                    </div>
+
+                    <div>
+                        <label for="partnerName" class="block text-love-midnight font-semibold mb-2">Partner's Name:</label>
+                        <input type="text" id="partnerName" class="input-style w-full" placeholder=" " value="">
+                    </div>
+
+                    <div class="pt-4">
+                        <button onclick="calculateLove()" class="w-full px-8 py-4 bg-love-ruby text-love-white rounded-full text-xl font-extrabold shadow-2xl hover:scale-[1.02] transition-transform transform active:scale-[0.98] shadow-love-ruby/50">
+                            <i class="fas fa-heartbeat mr-3"></i> Calculate Percentage
+                        </button>
+                    </div>
+                </div>
+
+                <div id="resultContainer" class="mt-10 text-center p-6 bg-white rounded-xl border-4 border-love-rosegold shadow-lg hidden animate-fade-in-up" style="animation-delay: 0.6s;">
+                    <p class="text-love-midnight font-bold text-2xl mb-2">Love Match Score:</p>
+                    <h2 id="loveResult" class="text-6xl font-extrabold text-love-ruby mb-6"></h2>
+                    
+                    <div class="progress-bar mb-6">
+                        <div id="progressBarFill" class="progress-fill" style="width: 0%;"></div>
+                        <span id="progressText" class="absolute inset-0 flex items-center justify-center text-sm font-bold text-love-midnight z-10">Calculating...</span>
+                    </div>
+
+                    <p id="loveMessage" class="text-love-midnight font-medium text-xl bg-love-pink-blush p-4 rounded-lg border border-love-rosegold"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        let musicPlaying = false;
+        
+        // --- LOVE LINES (BANGLA) - Kept original array, as this is for the 'Reveal Love Line' button ---
+        const loveLines = [
+            "তুমি না থাকলে আমার হাসিটাই হারিয়ে যায়",
+            "তোমার চোখে যে শান্তি, তা পৃথিবীতে নেই",
+            "তুমি পাশে থাকলেই পৃথিবীটা স্বপ্ন মনে হয়",
+            "তোমার স্পর্শে আমার মন জেগে ওঠে",
+            "তুমি ছাড়া জীবনটা নিঃশব্দ শূন্যতা",
+            "তোমার কণ্ঠ শুনলেই মনটা শান্ত হয়",
+            "তুমি আমার প্রতিদিনের প্রার্থনা",
+            "তোমার ভালোবাসা আমার সবচেয়ে বড় সাহস",
+            "তুমি আমার অনুভূতির শেষ প্রান্ত",
+            "তোমার এক হাসিতেই আমার সব দুঃখ উড়ে যায়",
+            "তুমি আমার অজানা সুখের গল্প",
+            "তোমার প্রেমে আমি নতুন করে বাঁচি",
+            "তুমি ছাড়া কিছুই ভালো লাগে না",
+            "তোমার উপস্থিতিতেই আমার পৃথিবী রঙিন",
+            "তুমি আমার জীবনের সবচেয়ে সুন্দর অধ্যায়",
+            "তোমার নাম শুনলেই হৃদয় নাচে",
+            "তুমি আমার নিঃশ্বাসের ছন্দ",
+            "তোমার ভালোবাসায় আমি সম্পূর্ণ",
+            "তুমি আমার হৃদয়ের রাজকন্যা",
+            "তোমাকে ছাড়া আমি কিছুই নই",
+            "তুমি আমার চাওয়া আর পাওয়ার মিলন",
+            "তোমার চোখে আমার স্বপ্ন বাসা বাঁধে",
+            "তুমি আমার জীবনের কবিতা",
+            "তোমার মিষ্টি হাসিতেই আছে আমার প্রশান্তি",
+            "তুমি আমার জীবনের অর্থ",
+            "তোমাকে ভাবলেই মুখে হাসি আসে",
+            "তুমি আমার হৃদয়ের দিকনির্দেশনা",
+            "তোমার ভালোবাসা আমার পৃথিবীর আলো",
+            "তুমি আমার প্রতিদিনের প্রথম চিন্তা",
+            "তোমার ছোঁয়ায় সবকিছু সুন্দর লাগে",
+            "তুমি আমার চোখের আলো",
+            "তোমার ভালোবাসা আমার প্রেরণা",
+            "তুমি আমার আত্মার সঙ্গী",
+            "তুমি পাশে থাকলে সবকিছু সহজ লাগে",
+            "তোমার ভালোবাসায় আমি বেঁচে আছি",
+            "তুমি আমার জীবনের রঙ",
+            "তোমার স্পর্শে আমি শান্তি পাই",
+            "তুমি আমার হৃদয়ের ঠিকানা",
+            "তোমার ভালোবাসা আমার একমাত্র স্বপ্ন",
+            "তুমি আমার সুখের কারণ",
+            "তোমার কণ্ঠস্বর আমার প্রিয় সুর",
+            "তুমি আমার জীবনের আলো",
+            "তোমার এক চাওয়ায় আমার পৃথিবী থেমে যায়",
+            "তুমি আমার হৃদয়ের সুর",
+            "তোমার ভালোবাসায় আমি পূর্ণ",
+            "তুমি আমার চিরদিনের প্রিয়",
+            "তোমার স্পর্শে আমি নতুন করে বাঁচি",
+            "তুমি আমার জীবনের শ্রেষ্ঠ অংশ",
+            "তোমার হাসি আমার সকালকে রাঙিয়ে দেয়",
+            "তুমি আমার পৃথিবীর সবচেয়ে সুন্দর অনুভূতি",
+            "তোমার ভালোবাসাই আমার প্রিয় আসক্তি",
+            "তুমি আমার একমাত্র স্বপ্নের গন্তব্য",
+            "তোমার কথা ভাবলেই হৃদয় উষ্ণ হয়",
+            "তুমি আমার নিঃশব্দ ভালোবাসা",
+            "তোমার ভালোবাসা ছাড়া জীবন অসম্পূর্ণ",
+            "তুমি আমার চোখের মণি",
+            "তোমার ভালোবাসায় আছে আমার অস্তিত্ব",
+            "তুমি আমার হৃদয়ের ধ্বনি",
+            "তোমার পাশে থাকলেই আমি সম্পূর্ণ",
+            "তুমি আমার জীবনের সঙ্গী",
+            "তোমার ভালোবাসায় আমি মুক্তি পাই",
+            "তুমি আমার হৃদয়ের সবচেয়ে নরম কোণ",
+            "তোমার ছোঁয়ায় আমি জীবন খুঁজি",
+            "তুমি আমার সুখের আকাশ",
+            "তোমার ভালোবাসা আমার রক্তে মিশে আছে",
+            "তুমি আমার হৃদয়ের অনন্ত কবিতা",
+            "তোমার কথা ভাবলেই মন নরম হয়ে যায়",
+            "তুমি আমার ভালোবাসার কারণ",
+            "তোমার চোখে আমার প্রতিচ্ছবি দেখি",
+            "তুমি আমার হৃদয়ের শেষ আশ্রয়",
+            "তোমার ভালোবাসা আমার অনন্ত শক্তি",
+            "তুমি আমার একমাত্র প্রিয় মানুষ",
+            "তোমার স্পর্শেই আমি শান্তি পাই",
+            "তুমি আমার মনের একমাত্র রাজা",
+            "তোমার ভালোবাসা আমার জীবনের আশীর্বাদ",
+            "তুমি আমার হৃদয়ের রঙিন স্বপ্ন",
+            "তোমার উপস্থিতিতে আমি পূর্ণতা পাই",
+            "তুমি আমার জীবনের প্রিয়তম অধ্যায়",
+            "তোমার ভালোবাসা আমার সকাল",
+            "তুমি আমার হৃদয়ের সুরেলা ব্যথা",
+            "তোমার হাসিতেই আমার বেঁচে থাকা",
+            "তুমি আমার জীবনের জাদু",
+            "তোমার ভালোবাসায় আমি হারিয়ে যাই",
+            "তুমি আমার ভালোবাসার রাজ্য",
+            "তোমার চোখে আমার শান্তি",
+            "তুমি আমার ভালোবাসার গল্প",
+            "তোমার উপস্থিতিতে মন জেগে ওঠে",
+            "তুমি আমার জীবনের অলৌকিকতা",
+            "তোমার ভালোবাসা আমার চিরন্তন আনন্দ",
+            "তুমি আমার অনুভূতির শেষ অধ্যায়",
+            "তোমার ছোঁয়ায় আমি সম্পূর্ণ হই",
+            "তুমি আমার হৃদয়ের রাজকন্যা",
+            "তোমার ভালোবাসা আমার নিঃশ্বাস",
+            "তুমি আমার জীবনের সুর",
+            "তোমার চোখে আছে আমার স্বপ্ন",
+            "তুমি আমার হৃদয়ের গল্পের নায়িকা",
+            "তোমার ভালোবাসায় আমি খুঁজে পাই নিজেকে"
+        ];
+
+
+        // --- UPDATED CALCULATOR MESSAGES (100 LINES FOR RANDOM SELECTION) ---
+        const loveCalculatorMessages = [
+            "১০০% নিখুঁত! স্বর্গের জুটি। আপনাদের সম্পর্ক চিরন্তন ও স্বর্গীয়। 💍",
+            "৯৯%! এত ভালোবাসা কোথায় রাখব? মন দিয়ে সম্পর্কটা ধরে রাখুন। 😊",
+            "অবিশ্বাস্য ভালোবাসা! একে অপরের জন্য তৈরি হয়েছেন। গভীরতম বন্ধন। ❤️",
+            "ঐশ্বরিক জুটি! আপনাদের মধ্যে গভীরতম আস্থা ও সম্মান বিদ্যমান। 🌟",
+            "সম্পূর্ণ সামঞ্জস্য! আপনাদের সম্পর্ক একটি স্বপ্নের মতো। 💕",
+            "অবিচ্ছেদ্য বন্ধন! ভালোবাসা সবসময়ই জয়ী হবে। ✨",
+            "দারুণ সম্পর্ক! আপনারা একে অপরের পরিপূরক। 💑",
+            "চমৎকার বোঝাপড়া! আপনাদের জীবন সুখ ও শান্তিতে ভরে উঠুক। 😍",
+            "নিখুঁত মিল! এই সম্পর্ককে আরও যত্নে লালন করুন। 💖",
+            "আপনারা একে অপরের নিঃশ্বাসে মিশে আছেন। ভাগ্য আপনাদের পক্ষে। 🍀",
+            "এক কথায় অসাধারণ! এমন সম্পর্ক শুধু ভাগ্যে মেলে। 😇",
+            "দু'জনের হৃদয়ের স্পন্দন এক তালে বাজে। থামবে না এই সুর। 🎶",
+            "ভালোবাসার ফুল ফুটিয়েছেন, এবার যত্ন নিন। 🌷",
+            "সেরা জুটিদের মধ্যে আপনারা অন্যতম। আপনাদের দেখে শেখার আছে! 👍",
+            "আপনারা একসাথে থাকলে পৃথিবী আরও সুন্দর হয়। 🌍",
+            "মিষ্টি ভালোবাসা! একে অপরের প্রতি মুগ্ধতা কখনই কমবে না। 🍬",
+            "আপনারা যেন এক মুদ্রার এপিঠ-ওপিঠ, কেউ কাউকে ছাড়া অসম্পূর্ণ। ☯️",
+            "একটু ঝগড়া, আবার অনেকটা কাছে আসা - এটাই আপনাদের প্রেম। 😉",
+            "জীবনের সব বাঁকে একে অপরের হাত ধরে থাকুন। জয় আপনাদেরই হবে। 🤝",
+            "প্রেমের বাঁধন এত শক্ত যে ভাঙা অসম্ভব। মজবুত থাকুন! 💪",
+            "আকাশের চাঁদ আর মাটির ফুল, আপনাদের সম্পর্কটা ঠিক তেমনই নির্মল। 🌕",
+            "এই ভালোবাসা শুধু জন্ম-জন্মান্তরের জন্য। অমর প্রেম! ♾️",
+            "দু'জনের মাঝেই যেন এক মায়াবী টান, যা কখনও ফুরাবে না। 💫",
+            "অবিরাম সুখের ফোয়ারা বইছে আপনাদের জীবনে। ⛲",
+            "আপনারা ভালোবাসার এক জীবন্ত উদাহরণ। সবাইকে অনুপ্রাণিত করুন। 💡",
+            "হৃদয় দিয়ে অনুভব করুন, এই বন্ধন এক অলৌকিকতা। 🙏",
+            "প্রেমের এই পথ যেন কখনই না শেষ হয়। 🛤️",
+            "আপনারা দুজন এক অসাধারণ রসায়ন তৈরি করেছেন।🧪",
+            "সম্পর্কের চাবি আপনাদের হাতেই, একে যত্ন করে রাখুন। 🔑",
+            "ভালোবাসার স্রোত বইছে, এই স্রোতে ভাসতে থাকুন। 🌊",
+            // --- Random/Slightly Critical/Funny Lines Begin Here (Total 70 more) ---
+            "ভালোবাসা তো আছে, তবে Ego-টা একটু কমাতে হবে, মশাই! 🧘",
+            "দুই নৌকায় পা নয়, একটিতেই মন দিন। ফলাফল সুন্দর হবে। ⛵",
+            "বেশি Romance নয়, কাজের প্রতিও মনোযোগ দিন। জীবনের সবটাই গুরুত্বপূর্ণ। 💼",
+            "সাবধান! আশেপাশে ১২ ভাতারী ঘোরার সম্ভাবনা আছে। নজর রাখুন! 👁️",
+            "কম হলেও ভালোবাসাটা খাঁটি। একে বাড়তে দিন, কৃত্রিমতা নয়। 🌱",
+            "ডিম্ভা! এবার কাজে মন দাও। প্রেম-টেম পরে হবে। 🎯",
+            "হাসি কম, চিন্তা বেশি। একটু হাসি-খুশি থাকুন। 😄",
+            "ভালোবাসার চারাগাছটিকে রোজ জল দিন, নাহলে শুকিয়ে যাবে। 💧",
+            "নিয়ম মেনে চলুন, না হলে কিন্তু ব্রেক-আপ অবধারিত! 🚨",
+            "সম্পর্কের রসায়ন ঠিক করতে আরও গবেষণা প্রয়োজন। 🔬",
+            "নিয়মিত ডেটিং করুন, শুধু মেসেজ বা ফোন নয়। ☕",
+            "ঝগড়ার মাত্রা কমাতে হবে, নাহলে ভালোবাসা হার মানবে। 🤬",
+            "আপনারা দু'জনই খুব ভালো, কিন্তু একটু বেশিই চাপা! মন খুলে কথা বলুন। 🤐",
+            "ভালোবাসার এই শতাংশটি 'লাইক' বা 'কমেন্ট' দিয়ে মাপা যায় না। 😉",
+            "মিষ্টি করে কথা বলুন, তিক্ততা দূর হবে। 🍯",
+            "বিশ্বাস রাখুন, অবিশ্বাস থেকেই সব ঝামেলার শুরু। 👻",
+            "হাতে হাত রেখে একসাথে পথ চলুন, ফল ভালো হবে। 🚶‍♀️🚶‍♂️",
+            "আপনারা একে অপরের বিপরীত হলেও, তাই হয়তো এত আকর্ষণ। 🧲",
+            "প্রেমের জন্য আরও চেষ্টা প্রয়োজন। হাল ছাড়বেন না! 🥊",
+            "একটু বেশি সিরিয়াস হয়ে যাচ্ছেন, একটু হালকা থাকুন। 🎈",
+            "ভালোবাসা বাড়াতে উপহার দিন, সেটা দামি হতে হবে না। 🎁",
+            "এই ফলাফল নিয়ে সিরিয়াস হবেন না, এটি শুধুই বিনোদনের জন্য। 😂",
+            "একটু বেশিই সন্দেহপ্রবণ, বিশ্বাস করতে শিখুন। 🤨",
+            "আপনাদের সম্পর্ক যেন এক রহস্যময় গল্প। 📜",
+            "ভুল বোঝাবুঝি দূর করুন, সম্পর্ককে মজবুত করুন। 🏗️",
+            "আপনারা দুজনই খুব ইন্টারেস্টিং, একে অপরের জীবন আরও রঙিন করুন। 🎨",
+            "ভালোবাসা তো আছেই, তবে বন্ধুত্বের জায়গাটা আরও বাড়ান। 👯",
+            "মনোযোগ বাড়ান, সম্পর্ককে আরও গভীর করুন। 🧐",
+            "একটু সময় নিন, ধীরে ধীরে সব ঠিক হয়ে যাবে। ⏳",
+            "এখনও ভালোবাসার প্রাথমিক পর্যায়ে আছেন, এগিয়ে যান। 🚀",
+            "ছোট ছোট জিনিসে আনন্দ খুঁজুন। 🥳",
+            "আপনারা এখনও 'জাস্ট ফ্রেন্ডস' জোনে আছেন কি? নিশ্চিত করুন! 🤔",
+            "আপনারা একে অপরের জন্য কফি আর কুকিজের মতো! ☕🍪",
+            "খুশি থাকুন, সম্পর্ককে আরও প্রাণবন্ত করুন। 💃🕺",
+            "ভালোবাসা একটি শিল্প, আপনারা সেই শিল্পের শিল্পী। 🖼️",
+            "এই স্কোর পরিবর্তনশীল, চেষ্টা করলে আরও ভালো ফল আসবে। 📈",
+            "আপনার সম্পর্ক যেন একটি সুন্দর কবিতা। 📝",
+            "দৈনন্দিন জীবনের চাপকে ভালোবাসার উপর প্রভাব ফেলতে দেবেন না। 🛡️",
+            "একটু অ্যাডভেঞ্চার দরকার! কোথাও ঘুরে আসুন। 🏞️",
+            "আপনারা দুজনই খুব ভাগ্যবাণ, এমন ভালোবাসা পেয়েছেন। 💖",
+            "পরস্পরের প্রতি সহানুভূতি রাখুন। 🌱",
+            "ভালোবাসা বাড়াতে হাসি জরুরি। 😊",
+            "আপনারা যেন দুটি আলাদা গ্রহ, কিন্তু মাধ্যাকর্ষণ শক্তি আপনাদের টেনে এনেছে। 🪐",
+            "সম্পর্কের এই ট্রেন যেন কোনোদিন না থামে। 🚂",
+            "এই বন্ধন যেন এক অমূল্য রত্ন। 💎",
+            "ভবিষ্যৎ উজ্জ্বল, শুধু একে অপরের পাশে থাকুন। ☀️",
+            "ভালোবাসার রঙে জীবন রাঙান। 🌈",
+            "আপনারা একে অপরের প্রেরণা। 🔥",
+            "আপনাদের সম্পর্কের মজাদার দিকটা বজায় রাখুন। 😂",
+            "একটু বেশি রোম্যান্টিক হওয়া জরুরি। 🌹",
+            "ভালোবাসা একটি যুদ্ধ, তবে জিতেছেন আপনারাই। ⚔️",
+            "একে অপরের স্বপ্ন পূরণে সাহায্য করুন। 🌠",
+            "আপনারা ভালোবাসার এক নতুন সংজ্ঞা তৈরি করেছেন। 📖",
+            "একটু নীরবতা দরকার, একে অপরের চোখের ভাষা বুঝুন। 🤫",
+            "দু'জনের ভাগ্য একে অপরের সাথে জড়িয়ে আছে। 🤞",
+            "সম্পর্কের ভিত্তি মজবুত, চিন্তা নেই! 🧱",
+            "একে অপরের প্রতি যত্নশীল হন। 🩺",
+            "ভালোবাসা কখনও বৃদ্ধ হয় না, একে চিরন্তন রাখুন। 👴👵",
+            "আপনারা যেন চাঁদের আলো আর রাতের তারার মতো। 🌜✨",
+            "ছোট ছোট ভুলে রাগ করবেন না। 😠",
+            "আপনারা যেন দুটি ভিন্ন নদী, যারা সাগরে এসে মিশেছে। 🏞️🌊",
+            "এই ভালোবাসা যেন এক জাদু! ✨",
+            "ভালোবাসা বাড়াতে একটু প্রশংসা করুন। 🗣️",
+            "আপনারা যেন এক রূপকথার চরিত্র। 👑",
+            "মনের কথা খুলে বলুন, লুকোচুরি নয়। 💬",
+            "এই ফলাফল শুধুই শুরু, আসল খেলা বাকি! 🎮",
+            "ভালোবাসার পরীক্ষা দিতে ভয় পাবেন না। 📝",
+            "আপনারা একে অপরের শ্রেষ্ঠ বন্ধু। 🫂",
+            "ভালোবাসা জীবনের লবণ, এর স্বাদ নিন। 🧂",
+            "একটু বেশি আবেগপ্রবণ, নিয়ন্ত্রণ শিখুন। 😢",
+            "আপনারা একে অপরের সবচেয়ে বড় শক্তি। ⚡",
+        ];
+
+
+        // --- GLOBAL MUSIC LOGIC (Starts on first interaction) ---
+        function startMusicOnInteraction() {
+            // Remove the handler after it runs once
+            document.body.onclick = null; 
+
+            if (!musicPlaying) {
+                audio.volume = 0.5;
+                audio.play().then(() => {
+                    musicPlaying = true;
+                    musicIcon.classList.remove('fa-volume-off');
+                    musicIcon.classList.add('fa-volume-up');
+                    musicIcon.title = "Music Playing";
+                }).catch(error => {
+                    console.warn("Autoplay attempt failed on interaction. User must click the icon to start.");
+                });
+            }
+        }
+        
+        function toggleMusic() {
+            if (musicPlaying) {
+                audio.pause();
+                musicPlaying = false;
+                musicIcon.classList.remove('fa-volume-up');
+                musicIcon.classList.add('fa-volume-off');
+                musicIcon.title = "Start Background Music";
+            } else {
+                // Manually start if paused
+                startMusicOnInteraction(); 
+            }
+        }
+
+        // --- SPA NAVIGATION LOGIC ---
+        function showSection(sectionId, event) {
+            // Hide all sections
+            document.getElementById('home-section').classList.add('hidden');
+            document.getElementById('gallery-section').classList.add('hidden');
+            document.getElementById('calculator-section').classList.add('hidden');
+            
+            // Show the selected section
+            document.getElementById(sectionId + '-section').classList.remove('hidden');
+
+            // Update active tab style
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active-tab');
+            });
+            if (event && event.currentTarget) {
+                 event.currentTarget.classList.add('active-tab');
+            } else {
+                // Fallback for window.onload initial call
+                const initialLink = document.querySelector(`.nav-link[onclick*="'${sectionId}'"]`);
+                if (initialLink) {
+                     initialLink.classList.add('active-tab');
+                }
+            }
+
+            // Scroll to the top of the content area for smooth transition
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- HOME SECTION LOGIC (Love Line Spinner) ---
+        function spinForLoveLine() {
+            const loveLineElement = document.getElementById('loveLine');
+            // Re-trigger animation by removing and adding the class
+            loveLineElement.classList.remove('animate-fade-in-up'); 
+            void loveLineElement.offsetWidth; // Force reflow
+            
+            const randomIndex = Math.floor(Math.random() * loveLines.length);
+            loveLineElement.textContent = loveLines[randomIndex];
+            loveLineElement.classList.add('animate-fade-in-up');
+        }
+
+        // --- CALCULATOR LOGIC ---
+        function calculateLove() {
+            const yourName = document.getElementById('yourName').value.trim();
+            const partnerName = document.getElementById('partnerName').value.trim();
+            const resultContainer = document.getElementById('resultContainer');
+            const loveResult = document.getElementById('loveResult');
+            const loveMessage = document.getElementById('loveMessage');
+            const progressBarFill = document.getElementById('progressBarFill');
+            const progressText = document.getElementById('progressText');
+
+            if (!yourName || !partnerName) {
+                loveResult.textContent = '❌';
+                loveMessage.textContent = 'Please enter both names.';
+                progressText.textContent = 'Calculation Failed';
+                progressBarFill.style.width = '0%';
+                resultContainer.classList.remove('hidden');
+                return;
+            }
+
+            // A fun pseudo-random calculation based on character codes
+            const combinedNames = (yourName.toLowerCase() + partnerName.toLowerCase()).replace(/[^a-z0-9]/g, '');
+            let seed = 0;
+            for (let i = 0; i < combinedNames.length; i++) {
+                seed += combinedNames.charCodeAt(i) * (i + 1); // Add a weight for position
+            }
+            
+            // Generate a random-like percentage between 10 and 100 for dramatic effect
+            const lovePercentage = (seed % 91) + 10; 
+            
+            // --- NEW: Truly Random Message Selection (1 out of 100) ---
+            const messageIndex = Math.floor(Math.random() * loveCalculatorMessages.length);
+            const message = loveCalculatorMessages[messageIndex];
+            
+            // Animated Counting Effect
+            let start = 0;
+            const duration = 2000; // 2 seconds
+            const startTime = performance.now();
+
+            // Reset animations
+            progressBarFill.style.width = '0%';
+            progressBarFill.classList.remove('animate-progress-fill');
+            void progressBarFill.offsetWidth; // Trigger reflow
+
+            // Set the final width for the animation
+            progressBarFill.style.setProperty('--progress-width', `${lovePercentage}%`);
+            progressBarFill.classList.add('animate-progress-fill');
+            
+            progressText.textContent = 'Calculating...';
+            loveMessage.textContent = ''; // Clear previous message
+
+            function animateCount(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease-out effect
+                const easedProgress = 1 - Math.pow(1 - progress, 3); 
+                const currentPercentage = Math.floor(easedProgress * (lovePercentage - start)) + start;
+                loveResult.textContent = `${currentPercentage}%`;
+                progressText.textContent = `${currentPercentage}% Match`;
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateCount);
+                } else {
+                    loveResult.textContent = `${lovePercentage}%`; // Final value
+                    progressText.textContent = `${lovePercentage}% Match`;
+                    loveMessage.textContent = message;
+                }
+            }
+            requestAnimationFrame(animateCount);
+            
+            resultContainer.classList.remove('hidden');
+        }
+
+        // --- FALLING HEART EFFECT (Brishti) ---
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            // Different heart emojis for variety
+            const hearts = ['💖', '💕', '💗', '❤️', '✨'];
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)]; 
+            heart.classList.add('falling-heart'); 
+            
+            // Random start position (0vw to 100vw)
+            const startX = Math.random() * 100 + 'vw';
+            // Random end position (for a slight drift)
+            const driftEnd = (Math.random() * 30 - 15) + 'px'; // -15px to +15px
+            const duration = Math.random() * 5 + 6; // 6 to 11 seconds
+            const delay = Math.random() * 5;
+            const size = Math.random() * 1 + 1.2; // 1.2rem to 2.2rem
+
+            heart.style.left = startX;
+            heart.style.setProperty('--fall-x-end', driftEnd); // Set CSS Variable for animation
+            heart.style.animationDuration = duration + 's';
+            heart.style.animationDelay = delay + 's';
+            heart.style.fontSize = size + 'rem';
+            heart.style.opacity = Math.random() * 0.5 + 0.5;
+
+            document.body.appendChild(heart);
+            // Remove heart after it falls off screen (duration + delay)
+            setTimeout(() => { heart.remove(); }, (duration + delay) * 1000);
+        }
+
+        function startHeartRain() {
+            // Create a heart every 150 milliseconds for a continuous rain effect
+            setInterval(createFallingHeart, 150); 
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = function() {
+            startHeartRain();
+            // Show home section on load and set the active tab
+            showSection('home', { currentTarget: document.querySelector('.nav-link[onclick*="home"]') });
+        };
+    </script>
+</body>
+</html>
